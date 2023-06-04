@@ -13,7 +13,7 @@ class Main {
         List<Integer> list = Arrays.stream(arr).boxed().sorted().collect(Collectors.toList());
         //List<Integer> list = Arrays.stream(arr).boxed().sorted().toList();   java 1.6 이후 부터는 .toList() 가능
 
-        //List<Integer> -> Stream<Integer> -> Stream<int> -> int[]
+        //List<Integer> -> Stream<Integer> -> IntStream -> int[]
         int[] arr1 = list.stream().mapToInt(i->i).toArray();
         //int[] arr1 = list.stream().mapToInt(Integer::intValue).toArray();
 
