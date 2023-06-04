@@ -10,20 +10,26 @@ class Main {
     public static void main(String[] args)
     {
         int[] arr = {1,2,3,4,1,2};
-        Arrays.sort(arr); // int[] 바로 정렬 가능
-        // reverseOrder 는 Interger에만 사용가능.
+        Arrays.sort(arr); // int[] 기본정렬만 가능. primitive타입은 Comparator사용 불가능.
         // int[] -> IntStream -> Stream<Interger> -> 정렬 -> IntStream -> int[]
         int[] arrReverse = Arrays.stream(arr).boxed().sorted(Collections.reverseOrder()).mapToInt(i->i).toArray();
 
         // int[] -> IntStream -> Stream<Integer> -> Integer[]
         Integer[] integers = Arrays.stream(arr).boxed().toArray(Integer[]::new);
         // Interger[] 는 역순도 바로 정렬 가능
+        Arrays.sort(integers,(a,b)->{return b-a;});
         Arrays.sort(integers,Collections.reverseOrder());
         // Integer[] -> Stream<Integer> -> IntStream -> int[]
         int[] ints = Arrays.stream(integers).mapToInt(i->i).toArray();
         // Integer[] -> Stream<Integer> ->List<Integer>
         List<Integer> integerList = Arrays.stream(integers).collect(Collectors.toList());
-        integerList.sort(Collections.reverseOrder());
+        //List 정렬
+        Collections.sort(integerList, (a,b)->{return b-a;});
+        Collections.sort(integerList,Collections.reverseOrder());
+        integerList.sort((a,b)->{return b-a;});
+        integerList.sort(Comparator.naturalOrder());
+        integerList.sort(Comparator.reverseOrder());
+
 
         // int[] -> IntStream -> Stream<Integer> -> List<Integer>        collect 는 Stream<Integer>에만 쓸 수 있다.
         List<Integer> list = Arrays.stream(arr).boxed().sorted().collect(Collectors.toList());
