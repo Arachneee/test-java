@@ -55,19 +55,29 @@ class Main {
         // String -> char[]
         char[] charArray = str.toCharArray();
         // String -> IntStream -> Stream<Character> -> List<Charater>
-        List<Character> charlist = str.chars().mapToObj(i->(char)i).sorted(Collections.reverseOrder()).collect(Collectors.toList());
+        List<Character> charlist = str.chars().mapToObj(i->(char)i).collect(Collectors.toList());
 
         // String[] -> List<String>
         List<String> strList = Arrays.asList(strArray);
+        //List<String> -> String[]
+        String[] strArray1 = strList.toArray(new String[0]); // size를 0으로 초기화하는 것이 속도에 유리
 
         // String[] -> Stream<String>
         Stream<String> strStream = Stream.of(strArray);
+
         // List<String> -> Stream<String>
         Stream<String> strStream1 = strList.stream();
 
         // Stream<String> -> String
-        String str1 = strStream.collect(Collectors.joining());
+        String str1 = strStream1.collect(Collectors.joining());
+        //정렬
+        // 시간 빠른 순서
+        String strsorted = Stream.of(str.split("")).sorted().collect(Collectors.joining());
+        String strsorted1 = str.chars().sorted().mapToObj(i->(char)i).map(String::valueOf).collect(Collectors.joining());
+        String strsorted2 = str.chars().sorted().collect(StringBuilder::new,StringBuilder::appendCodePoint,StringBuilder::append).toString();
 
-        System.out.println(str1);
+        //프로그래머스 test
+        Solution s = new Solution();
+        System.out.println(s.solution("one4seveneight"));
     }
 }
