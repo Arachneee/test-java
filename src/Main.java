@@ -47,20 +47,23 @@ class Main {
         integerList.sort((a,b)->{return b-a;});
         //뒤집기
         Collections.reverse(integerList);
-
+        // 부분 배열
+        int[] subArray = Arrays.copyOfRange(intArray,2,4);
+        List<Integer> subList = integerList.subList(2,4);
+        List<Integer> subList1 = integerList.stream().collect(Collectors.collectingAndThen(Collectors.toList(),i->i.stream().skip(2).limit(4-2))).toList();
 
         String str = "OsdF ZbAd eKg";
         String[] strArray = str.split(" ");
 
         // String -> char[]
         char[] charArray = str.toCharArray();
-        // String -> IntStream -> Stream<Character> -> List<Charater>
+        // String -> IntStream -> Stream<Character> -> List<Character>
         List<Character> charlist = str.chars().mapToObj(i->(char)i).collect(Collectors.toList());
 
         // String[] -> List<String>
         List<String> strList = Arrays.asList(strArray);
         //List<String> -> String[]
-        String[] strArray1 = strList.toArray(new String[0]); // size를 0으로 초기화하는 것이 속도에 유리
+        String[] strArray1 = strList.toArray(new String[0]); // size 를 0으로 초기화하는 것이 속도에 유리
         String[] strArray2 = strList.toArray(String[]::new);
 
 
