@@ -61,23 +61,32 @@ class Main {
         List<String> strList = Arrays.asList(strArray);
         //List<String> -> String[]
         String[] strArray1 = strList.toArray(new String[0]); // size를 0으로 초기화하는 것이 속도에 유리
+        String[] strArray2 = strList.toArray(String[]::new);
+
 
         // String[] -> Stream<String>
         Stream<String> strStream = Stream.of(strArray);
+        Stream<String> strStream1 = Arrays.stream(strArray);
 
         // List<String> -> Stream<String>
-        Stream<String> strStream1 = strList.stream();
+        Stream<String> strStream2 = strList.stream();
 
         // Stream<String> -> String
         String str1 = strStream1.collect(Collectors.joining());
+
         //정렬
         // 시간 빠른 순서
         String strsorted = Stream.of(str.split("")).sorted().collect(Collectors.joining());
         String strsorted1 = str.chars().sorted().mapToObj(i->(char)i).map(String::valueOf).collect(Collectors.joining());
         String strsorted2 = str.chars().sorted().collect(StringBuilder::new,StringBuilder::appendCodePoint,StringBuilder::append).toString();
 
+        // String[] 정렬
+        Arrays.sort(strArray, Comparator.reverseOrder());
+        String[] strings1 = Arrays.stream(strArray).sorted().toArray(String[]::new);
+
         //프로그래머스 test
         Solution s = new Solution();
-        System.out.println(s.solution("one4seveneight"));
+        String[] strings = {"sun", "bed", "car"};
+        System.out.println(Arrays.toString(s.solution(strings,1)));
     }
 }
