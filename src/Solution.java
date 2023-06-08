@@ -1,39 +1,91 @@
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 class Solution {
-    public int[] solution(int[] answers) {
-        int score1 = 0;
-        int score2 = 0;
-        int score3 = 0;
+    public int solution(String dartResult) {
+        Stack<Integer> scores = new Stack<>();
 
-        int[] answer1 = {1,2,3,4,5};
-        int[] answer2 = {2,1,2,3,2,4,2,5};
-        int[] answer3 = {3,3,1,1,2,2,4,4,5,5};
-
-        int a=0;
-        int b=0;
-        int c=0;
-
-        for(int answer: answers)
+        char[] dartArray = dartResult.toCharArray();
+        int i = 0;
+        while(i<dartResult.length())
         {
-            if (answer == answer1[a++%5])
-                score1++;
-            if (answer == answer2[b++%8])
-                score2++;
-            if (answer == answer3[c++%10])
-                score3++;
+            char now = dartArray[i];
+            if(now >= '2' && now <='9')
+            {
+                scores.push(now-'0');
+                i += 1;
+                continue;
+            }
+
+            if(now == '1' && dartArray[i+1] == '0')
+            {
+                scores.push(10);
+                i += 2;
+                continue;
+            }
+
+            if(now == '1')
+            {
+                scores.push(1);
+                i += 1;
+                continue;
+            }
+
+            if(now == '0')
+            {
+                scores.push(0);
+                i += 1;
+                continue;
+            }
+
+            if(now == 'S')
+            {
+                i += 1;
+                continue;
+            }
+
+            if(now == 'D')
+            {
+                int n = scores.pop();
+                scores.push(n*n);
+                i += 1;
+                continue;
+            }
+
+            if(now == 'T')
+            {
+                int n = scores.pop();
+                scores.push(n*n*n);
+                i += 1;
+                continue;
+            }
+
+            if(now == '*')
+            {
+                int n = scores.pop();
+                if(!scores.isEmpty())
+                {
+                    int n_1 = scores.pop();
+                    scores.push(n_1*2);
+                }
+                scores.push(n*2);
+                i += 1;
+                continue;
+            }
+
+            if(now == '#')
+            {
+                int n = scores.pop();
+                scores.push(n*(-1));
+                i+=1;
+                continue;
+            }
         }
-
-        int max_ = Math.max(Math.max(score1,score2),score3);
-
-        Map<Integer,Integer> map = new HashMap<>();
-
-        map.put(1,score1);
-        map.put(2,score2);
-        map.put(3,score3);
-
-        return map.entrySet().stream().filter(e->e.getValue()==max_).mapToInt(Map.Entry::getKey).toArray();
+        int result = 0;
+        for(int x:scores)
+        {
+            result += x;
+        }
+        return result;
     }
 }

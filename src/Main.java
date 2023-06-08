@@ -89,7 +89,8 @@ class Main {
 
         //프로그래머스 test
         Solution s = new Solution();
-        String[] strings = {"sun", "bed", "car"};
-        System.out.println(Arrays.toString(s.solution(strings,1)));
+        int[] strings = {2, 1, 2, 6, 2, 4, 3, 3};
+        String steee = "1D2S#10S";
+        System.out.println(s.solution(steee));
     }
 }
