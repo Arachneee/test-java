@@ -91,6 +91,6 @@ class Main {
         Solution s = new Solution();
         int[] strings = {2, 1, 2, 6, 2, 4, 3, 3};
         String steee = "1D2S#10S";
-        System.out.println(s.solution(steee));
+        System.out.println(s.solution(	5, new int[]{2, 4}, new int[]{3}));
     }
 }
