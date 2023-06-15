@@ -1,36 +1,40 @@
+import java.util.Stack;
 import java.util.*;
-import java.util.stream.Collectors;
 
 class Solution {
-    public int solution(int n, int[] lost, int[] reserve) {
-        int[] count = new int[n+1];
-        Arrays.fill(count,1);
+    public int solution(int[][] board, int[] moves) {
+        int n = board.length;
 
-        for (int i = 1; i <= n ; i++) {
-            if (Arrays.stream(reserve).boxed().collect(Collectors.toList()).contains(i)) {
-                count[i] += 1;
-            }
-            if (Arrays.stream(lost).boxed().collect(Collectors.toList()).contains(i)) {
-                count[i] -= 1;
-            }
+        List<Stack> dallList = new ArrayList<>();
+
+        for (int i = 0; i < n + 1; i++) {
+            Stack<Integer> stack = new Stack<>();
+            dallList.add(stack);
         }
 
-        for (int i = 1; i<n; i++) {
-            if (count[i] == 0) {
-                if (count[i-1] == 2) {
-                    count[i] = 1;
-                    count[i-1] = 1;
-                } else if (count[i+1] == 2) {
-                    count[i] = 1;
-                    count[i+1] = 1;
+        for (int i = n-1; i >= 0; i--) {
+            for (int j = 0; j < n; j++) {
+                int dall = board[i][j];
+                if (dall != 0) {
+                    dallList.get(j).push(dall);
                 }
             }
         }
-        if (count[n] == 0 && count[n-1] == 2) {
-            count[n] = 1;
-            count[n-1] = 1;
-        }
 
-        return (int) Arrays.stream(count).skip(1).filter(i->i>0).count();
+        Stack<Integer> result = new Stack<>();
+        int answer = 0;
+        for (int move:moves) {
+            Stack<Integer> nowStack = dallList.get(move-1);
+            if (!nowStack.isEmpty()) {
+                int now = nowStack.pop();
+                if (!result.isEmpty() && result.peek() == now) {
+                    result.pop();
+                    answer += 2;
+                } else {
+                    result.push(now);
+                }
+            }
+        }
+        return answer;
     }
 }

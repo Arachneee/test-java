@@ -91,6 +91,6 @@ class Main {
         Solution s = new Solution();
         int[] strings = {2, 1, 2, 6, 2, 4, 3, 3};
         String steee = "1D2S#10S";
-        System.out.println(s.solution(	5, new int[]{2, 4}, new int[]{3}));
+        System.out.println(s.solution(	new int[][]{{0,0,0,0,0},{0,0,1,0,3},{0,2,5,0,1},{4,2,4,4,2},{3,5,1,3,1}}, new int[]{1,5,3,5,1,2,1,4}));
     }
 }
