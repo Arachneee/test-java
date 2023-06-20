@@ -16,7 +16,7 @@ class Main {
         int[] ints = Arrays.stream(integers).mapToInt(i->i).toArray();
         // Integer[] -> Stream<Integer> ->List<Integer>
         List<Integer> integerList = Arrays.stream(integers).collect(Collectors.toList());
-        // int[] -> IntStream -> Stream<Integer> -> List<Integer>        collect 는 Stream<Integer>에만 쓸 수 있다.
+        // int[] -> IntStream -> Stream<Integer> -> List<Integer>   (collect 는 Stream<Integer>에만 쓸 수 있다.)
         List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
         List<Integer> list1 = IntStream.of(arr).boxed().collect(Collectors.toList());
         List<Integer> list2 = Arrays.stream(arr).boxed().toList();   //java 1.6 이후 부터는 .toList() 가능
