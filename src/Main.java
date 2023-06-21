@@ -89,8 +89,11 @@ class Main {
 
         //프로그래머스 test
         Solution s = new Solution();
+        String[] id_list = {"muzi", "frodo", "apeach", "neo"};
+        String[] report = {"muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"};
+
         int[] strings = {2, 1, 2, 6, 2, 4, 3, 3};
         String steee = "1D2S#10S";
-        System.out.println(s.solution(	new int[][]{{0,0,0,0,0},{0,0,1,0,3},{0,2,5,0,1},{4,2,4,4,2},{3,5,1,3,1}}, new int[]{1,5,3,5,1,2,1,4}));
+        System.out.println(Arrays.toString(s.solution(id_list, report, 2)));
     }
 }
