@@ -1,61 +1,33 @@
 import java.util.*;
 
-class Solution {
-    public int[] solution(String[] id_list, String[] report, int k) {
-        Map<String,User> users = new HashMap<>();
+class Solution
+{
+    public int solution(String s)
+    {
+        char[] strs = s.toCharArray();
 
-        for (String id : id_list) {
-            users.put(id,new User());
-        }
+        int n = s.length();
 
-        for (String rep : report) {
-            String[] userReport = rep.split(" ");
-
-            User now = users.get(userReport[0]);
-            if (now.reportId(userReport[1])) {
-                User repo = users.get(userReport[1]);
-                repo.reported();
-            }
-
-        }
-
-        int[] result = new int[id_list.length];
+        Stack<Character> stack = new Stack<>();
 
         int i = 0;
-        for (String key:users.keySet()) {
-            System.out.println(key);
-            int mailCount = 0;
-            for (String repo:users.get(key).reportSet) {
-                if (users.get(repo).isStoped(k))
-                    mailCount += 1;
+
+        while(true) {
+            if (i == n)
+                break;
+            if (stack.isEmpty())
+                stack.push(strs[i++]);
+            else if (stack.peek() == (strs[i])) {
+                stack.pop();
+                i++;
+            } else {
+                stack.push(strs[i++]);
             }
-            result[i++] = mailCount;
         }
 
-        return result;
-    }
-}
-class User {
-    int reportCount;
-    public Set<String> reportSet = new HashSet<>();
-
-    public void User() {
-        reportCount = 0;
-    }
-
-    public void reported() {
-        reportCount += 1;
-    }
-
-    public boolean isStoped(int k) {
-        return reportCount >= k;
-    }
-
-    public boolean reportId(String name) {
-        boolean success = true;
-        if (reportSet.contains(name))
-            success = false;
-        reportSet.add(name);
-        return success;
+        if (stack.size() == 0)
+            return 1;
+        else
+            return 0;
     }
 }

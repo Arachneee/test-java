@@ -93,7 +93,7 @@ class Main {
         String[] report = {"muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"};
 
         int[] strings = {2, 1, 2, 6, 2, 4, 3, 3};
-        String steee = "1D2S#10S";
-        System.out.println(Arrays.toString(s.solution(id_list, report, 2)));
+        String steee = "baabaa";
+        System.out.println(s.solution(steee));
     }
 }
