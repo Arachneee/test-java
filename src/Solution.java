@@ -1,33 +1,12 @@
 import java.util.*;
+import static java.util.stream.Collectors.*;
 
-class Solution
-{
-    public int solution(String s)
-    {
-        char[] strs = s.toCharArray();
-
-        int n = s.length();
-
-        Stack<Character> stack = new Stack<>();
-
-        int i = 0;
-
-        while(true) {
-            if (i == n)
-                break;
-            if (stack.isEmpty())
-                stack.push(strs[i++]);
-            else if (stack.peek() == (strs[i])) {
-                stack.pop();
-                i++;
-            } else {
-                stack.push(strs[i++]);
-            }
-        }
-
-        if (stack.size() == 0)
-            return 1;
-        else
-            return 0;
+class Solution {
+    public int solution(String[][] clothes) {
+        return Arrays.stream(clothes)
+            .collect(groupingBy(p -> p[1], mapping(p -> p[0], counting())))
+            .values()
+            .stream()
+            .reduce(1L, (x, y) -> x * (y + 1)).intValue() - 1;
     }
 }

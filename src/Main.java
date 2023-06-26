@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 class Main {
     public static void main(String[] args)
     {
+
         int[] arr = {1,2,3,4,1,2};
         // int[] -> IntStream -> Stream<Integer> -> Integer[]
         Integer[] integers = Arrays.stream(arr).boxed().toArray(Integer[]::new);
@@ -53,6 +54,7 @@ class Main {
         List<Integer> subList1 = integerList.stream().collect(Collectors.collectingAndThen(Collectors.toList(),i->i.stream().skip(2).limit(4-2))).toList();
 
         String str = "OsdF ZbAd eKg";
+
         String[] strArray = str.split(" ");
 
         // String -> char[]
@@ -93,7 +95,7 @@ class Main {
         String[] report = {"muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"};
 
         int[] strings = {2, 1, 2, 6, 2, 4, 3, 3};
-        String steee = "baabaa";
-        System.out.println(s.solution(steee));
+        String steee = "{{2},{2,1},{2,1,3},{2,1,3,4}}";
+        System.out.println(Arrays.toString(s.solution(steee)));
     }
 }
