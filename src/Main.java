@@ -77,7 +77,7 @@ class Main {
         Stream<String> strStream2 = strList.stream();
 
         // Stream<String> -> String
-        String str1 = strStream1.collect(Collectors.joining());
+        String str1 = strStream1.collect(Collectors.joining(", ","{","}"));
 
         //정렬
         // 시간 빠른 순서
@@ -96,6 +96,6 @@ class Main {
 
         int[] strings = {2, 1, 2, 6, 2, 4, 3, 3};
         String steee = "{{2},{2,1},{2,1,3},{2,1,3,4}}";
-        System.out.println(Arrays.toString(s.solution(steee)));
+        //System.out.println(Arrays.toString(s.solution(steee)));
     }
 }

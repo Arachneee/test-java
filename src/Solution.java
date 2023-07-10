@@ -1,12 +1,26 @@
-import java.util.*;
 import static java.util.stream.Collectors.*;
 
+import java.util.*;
+
 class Solution {
-    public int solution(String[][] clothes) {
-        return Arrays.stream(clothes)
-            .collect(groupingBy(p -> p[1], mapping(p -> p[0], counting())))
-            .values()
-            .stream()
-            .reduce(1L, (x, y) -> x * (y + 1)).intValue() - 1;
+    public boolean solution(String[] phone_book) {
+        Map<Character, List<String>> arr = Arrays.stream(phone_book).sorted().collect(groupingBy(i -> i.charAt(0)));
+        // System.out.println(Arrays.toString(phone_book));
+        int n = phone_book.length;
+
+        for (Character c : arr.keySet()) {
+            List<String> nowList = arr.get(c);
+            int len = nowList.size();
+            for (int i = 0; i < n; i++){
+                String now = nowList.get(i);
+                for (int j = i + 1; j < n; j++) {
+                    String next = nowList.get(j);
+                    if (next.indexOf(now) == 0)
+                        return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
