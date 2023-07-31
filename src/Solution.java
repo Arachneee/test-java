@@ -1,26 +1,43 @@
-import static java.util.stream.Collectors.*;
-
 import java.util.*;
 
 class Solution {
-    public boolean solution(String[] phone_book) {
-        Map<Character, List<String>> arr = Arrays.stream(phone_book).sorted().collect(groupingBy(i -> i.charAt(0)));
-        // System.out.println(Arrays.toString(phone_book));
-        int n = phone_book.length;
+    public int solution(String name) {
+        int result = 0;
+        int n = name.length();
 
-        for (Character c : arr.keySet()) {
-            List<String> nowList = arr.get(c);
-            int len = nowList.size();
-            for (int i = 0; i < n; i++){
-                String now = nowList.get(i);
-                for (int j = i + 1; j < n; j++) {
-                    String next = nowList.get(j);
-                    if (next.indexOf(now) == 0)
-                        return false;
+        for (int i = 0; i < n; i++) {
+            char c = name.charAt(i);
+            result += Math.min(c - 'A','Z' - c + 1);
+        }
+
+        int min = n - 1;
+
+        for (int i = 0; i < n; i++) {
+            if(name.charAt(i) != 'A' && i < n - 1 && name.charAt(i + 1) == 'A') {
+                int next = i + 1;
+
+                while (next < n && name.charAt(next) == 'A') {
+                    next += 1;
                 }
+
+//                if (next == n) {
+//
+//                }
+//                System.out.println( i + " " + next);
+                min = Math.min(min, Math.min(i * 2 + n - next, (n - next) * 2 + i));
             }
         }
 
-        return true;
+        if (result == 0) {
+            return 0;
+        }
+
+        if (min == n*2) {
+            result += n - 1;
+        } else {
+            result += min;
+        }
+
+        return result;
     }
 }

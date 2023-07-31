@@ -95,7 +95,9 @@ class Main {
         String[] report = {"muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"};
 
         int[] strings = {2, 1, 2, 6, 2, 4, 3, 3};
+        String[] orders = {"ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"};
+        int[] course = {2,3,4};
         String steee = "{{2},{2,1},{2,1,3},{2,1,3,4}}";
-        //System.out.println(Arrays.toString(s.solution(steee)));
+        System.out.println(s.solution("AAAAAA"));
     }
 }
