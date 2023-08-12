@@ -98,6 +98,7 @@ class Main {
         String[] orders = {"ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"};
         int[] course = {2,3,4};
         String steee = "{{2},{2,1},{2,1,3},{2,1,3,4}}";
-        System.out.println(s.solution("AAAAAA"));
+        int[] info = {3,,0,0,0,0,0,0,0,0,0};
+        System.out.println(Arrays.toString(s.solution(2, info)));
     }
 }

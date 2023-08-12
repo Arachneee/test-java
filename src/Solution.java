@@ -1,41 +1,44 @@
 import java.util.*;
 
 class Solution {
-    public int solution(String name) {
-        int result = 0;
-        int n = name.length();
+    public int[] solution(int n, int[] info) {
+        int[] result = new int[11];
+        int maxGap = 0;
 
-        for (int i = 0; i < n; i++) {
-            char c = name.charAt(i);
-            result += Math.min(c - 'A','Z' - c + 1);
-        }
+        for (int i = 0; i < (1 << 12); i++) {
+            int apeech = 0;
+            int lion = 0;
 
-        int min = n - 1;
+            int arrowCnt = 0;
 
-        for (int i = 0; i < n; i++) {
-            if(name.charAt(i) != 'A' && i < n - 1 && name.charAt(i + 1) == 'A') {
-                int next = i + 1;
+            int[] arr = new int[11];
 
-                while (next < n && name.charAt(next) == 'A') {
-                    next += 1;
+            for (int j = 0; j < 11; j++) {
+                if ((i & (1 << j)) != 0) {
+                    if (arrowCnt + info[j] + 1 <= n) {
+                        arrowCnt += info[j] + 1;
+                        lion += 10 - j;
+                        arr[j] = info[j] + 1;
+                    } else if (info[j] != 0) {
+                        apeech += 10 - j;
+                    }
+                } else if (info[j] != 0) {
+                    apeech += 10 - j;
                 }
 
-//                if (next == n) {
-//
-//                }
-//                System.out.println( i + " " + next);
-                min = Math.min(min, Math.min(i * 2 + n - next, (n - next) * 2 + i));
             }
+
+            arr[10] += n - arrowCnt;
+
+            if (apeech < lion && maxGap <= lion - apeech) {
+                result = arr.clone();
+                maxGap = lion - apeech;
+            }
+
         }
 
-        if (result == 0) {
-            return 0;
-        }
-
-        if (min == n*2) {
-            result += n - 1;
-        } else {
-            result += min;
+        if (maxGap == 0) {
+            return new int[] {-1};
         }
 
         return result;
