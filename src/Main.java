@@ -14,7 +14,9 @@ class Main {
         // int[] -> IntStream -> Stream<Integer> -> Integer[]
         Integer[] integers = Arrays.stream(arr).boxed().toArray(Integer[]::new);
         // Integer[] -> Stream<Integer> -> IntStream -> int[]
-        int[] ints = Arrays.stream(integers).mapToInt(i->i).toArray();
+        int[] ints = Arrays.stream(integers)
+            .mapToInt(Integer::intValue)
+            .toArray();
         // Integer[] -> Stream<Integer> ->List<Integer>
         List<Integer> integerList = Arrays.stream(integers).collect(Collectors.toList());
         // int[] -> IntStream -> Stream<Integer> -> List<Integer>   (collect 는 Stream<Integer>에만 쓸 수 있다.)
@@ -23,7 +25,9 @@ class Main {
         List<Integer> list2 = Arrays.stream(arr).boxed().toList();   //java 1.6 이후 부터는 .toList() 가능
         // List<Integer> -> Stream<Integer> -> IntStream -> int[]
         int[] intArray = list.stream().mapToInt(i->i).toArray();
-        int[] intArray2 = list.stream().mapToInt(Integer::intValue).toArray();
+        int[] intArray2 = list.stream()
+            .mapToInt(Integer::intValue)
+            .toArray();
         // List<Integer> -> Integer[]
         Integer[] integers1 = list.toArray(Integer[]::new);
 
